@@ -1,0 +1,59 @@
+Bước 1: Tìm Engulfing (2 nến ngược nhiều, nến đầu ngắn, nến sau dài gấp 3)
+Bước 2: Entry buy open nến trước, stop loss lowest (buy), highest (sell), take profit = 2 stop loss
+
+—> Cụ thể hơn
+
+20 buy limit 1h
+
+2 trường hợp: Buy/ Sell
+
+TH1: Buy
+Giảm > Tăng
+
+Nến 0 Buy Limit (hết hạn sau 20 ngày)
+Low Nến 1 > Entry = Open Nến 3
+Nến 2 tăng (body gấp 3 lần nến 3)
+Nến 3 giảm
+SL = Lowest 4 nến
+TP = 2 SL
+
+TH2: Sell (ngược lại)
+Tăng > Giảm
+
+Nến 0 Sell Limit (hết hạn sau 20 ngày)
+High nến 1 > Entry = Open Nến 3
+Nến 2 giảm (body gấp 3 lần nến 3)
+Nến 3 tăng
+SL = Highest 4 nến
+TP = 2 SL
+
+—> Cải tiến
+Bình thường: như trên
+Cải tiến: SL như trên +- 2 spread
+TP Theo Supply, Demand gần nhất
+
+
+Cach 2:
+Buy/sell luôn giá hiện tại rồi check supply/demand cũ
+
+Duyệt từ 4 -> 240 cây
+
+Buy nếu đó là demand (isDemandZone = true)
+Sell nếu đó là supply (isSupplyZone = true)
+
+Check Demand / Supply
+isDemandZone / isSupplyZone
+
+Buy (giá Ask)
+isDemandZone = true
+Nến N + 1 giảm
+Nến N tăng (body N gấp 3 lần body N+1)
+Ask >= open N + 1, Ask < Lowest(low N, N+1)
+Low Nến N-1 > open N + 1
+
+Sell (giá Bid)
+isSupplyZone = true
+Nến N + 1 tăng
+Nến N giảm (body N gấp 3 lần body N+1)
+Bid <= open N + 1, Bid > Lowest(low N, N+1)
+Low Nến N-1 > open N + 1
