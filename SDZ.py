@@ -19,15 +19,22 @@ def buy():
 def sell():
     print('Sell Action')
 
-currentPrice = 0
+ask = 0
+bid = 0
+spread = 0
 while (True):
     time.sleep(1)
-    price = mt5.symbol_info_tick(symbol).ask
-    if price != currentPrice:
-        currentPrice = price
-        count = count + 1
+    currentAsk = mt5.symbol_info_tick(symbol).ask
+    currentBid = mt5.symbol_info_tick(symbol).bid
+    if ask != currentAsk or bid != currentBid:
+        ask = currentAsk
+        bid = currentBid
         point = mt5.symbol_info(symbol).point
-        print(">> ", count, ", price = ", price, ", point = ", point)
+        digits = mt5.symbol_info(symbol).digits
+        spread = round(ask - bid, digits)
+        count = count + 1
+       
+        print(count, ">> ask = ", ask, ", bid = ", bid,  ", spread = ", spread, ", digits = ", digits)
     # if isDemandZone():
     #     buy()
     # elif isSupplyZone():
